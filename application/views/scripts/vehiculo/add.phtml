@@ -1,0 +1,52 @@
+<fieldset>
+<?php echo $this->form; ?>
+</fieldset>
+
+<style>
+fieldset{
+
+	border: 1px solid;
+	
+}
+
+
+#fieldset-left{
+	float:left;
+	border:none;
+}
+
+#fieldset-right{
+	float:left;
+	border:none;	
+}
+
+#fieldset-bottom{
+	clear:both;
+	border:none;	
+}
+
+#observacion{
+	height: 100px;
+}
+
+#idvehiculo-label{
+	display:none;
+}
+
+#submitbutton{
+	margin-left: 229px;
+}
+
+
+</style>
+
+<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
+<script>
+$('#FechaFab').datepicker({ dateFormat: "yy-mm-dd" });
+
+$('dl').addClass('dl-horizontal');
+
+</script>

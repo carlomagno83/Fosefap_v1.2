@@ -1,0 +1,95 @@
+<!--creo link para agregar un album -->
+
+<table>
+    <tr style="border:none;background:none"> 
+        <td style="border:none;background:none">  
+            <a href="<?php echo $this->url(array('controller' => 'vehiculo','action' => 'add')); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/add.gif" title="Agregar">
+            </a>    
+        </td>    
+        <td style="border:none;background:none"> 
+            <a href="<?php echo $this->url(array('controller' => 'vehiculo','action' => 'add')); ?>">         
+            Vehiculo
+            </a>
+        </td> 
+    </tr>    
+</table>
+
+
+<!--creo una tabla para mostrar los datos-->
+<div id="containerTable" style="width: 603px;overflow: scroll;">
+<table>
+    <tr>
+        <th>id</th>
+		<th>Placa</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Tipo</th>        
+        <th>Color</th>
+        <th>Combustible</th>		
+        <th>Motor</th>		
+        <th>Serie</th>
+        <th>Pasajero</th>
+        <th>Asientos</th>
+        <th>Fabricacion</th>	
+        <th>Observacion</th>
+        <th>&nbsp;</th>                
+        <th>&nbsp;</th>        
+    </tr>
+					
+<!--recorro el arreglo de datos-->
+    <?php $contador = 1; ?>
+    <?php foreach ($this->datos as $d) : ?>
+
+        <tr>
+
+        <td>
+            <?php echo $contador++; ?>
+        </td>
+		
+		<td>
+            <?php echo $d->placa; ?>
+        </td>
+              
+        <td><?php echo $d->marca; ?></td>
+                   
+        <td><?php echo $d->modelo; ?></td>
+                        
+        <td><?php echo $d->tipo; ?></td>
+                       
+        <td><?php echo $d->color; ?></td>
+                   
+        <td><?php echo $d->combustible; ?></td>
+                 
+        <td><?php echo $d->motor; ?></td>
+
+        <td><?php echo $d->serie; ?></td>
+
+        <td><?php echo $d->pasajero; ?></td>
+
+        <td><?php echo $d->asiento; ?></td>
+
+        <td><?php echo $d->FechaFab; ?></td>
+		
+        <td><?php echo $d->observacion; ?></td>	
+		        						 
+
+        <td>
+            <a href="<?php echo $this->url(array('controller' => 'vehiculo','action' => 'update', 'placa' => $d->placa)); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/ico-editar.gif" title="Editar">
+            </a>
+        </td>
+        
+        <td>
+
+            <a href="<?php echo $this->url(array('controller' => 'vehiculo',
+                       'action' => 'delete', 'placa' => $d->placa)); ?>">
+                <img src="<?php echo $this->baseUrl ?>/images/eliminar.png" title="Eliminar">
+            </a>
+        </td>
+        
+        </tr>
+<!--    fin del for-->
+    <?php endforeach; ?>
+</table>
+</div>

@@ -1,0 +1,63 @@
+<!--creo link para agregar un album -->
+
+<table>
+    <tr style="border:none;background:none"> 
+        <td style="border:none;background:none">  
+            <a href="<?php echo $this->url(array('controller' => 'tipocandelabro','action' => 'add')); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/add.gif" title="Agregar">
+            </a>    
+        </td>    
+        <td style="border:none;background:none"> 
+            <a href="<?php echo $this->url(array('controller' => 'tipocandelabro','action' => 'add')); ?>">         
+            Tipo de Candelabro
+            </a>
+        </td> 
+    </tr>    
+</table>
+
+
+<!--creo una tabla para mostrar los datos-->
+<div id="containerTable" style="width: 603px;overflow: scroll;">
+<table>
+    <tr>
+        <th>id</th>
+        <th>Nombre</th>
+		<th>Observacion</th>
+        <th>&nbsp;</th>                
+        <th>&nbsp;</th>        
+    </tr>
+					
+<!--recorro el arreglo de datos-->
+    <?php foreach ($this->datos as $d) : ?>
+
+        <tr>
+
+        <td>
+            <a href="<?php echo $this->url(array('controller' => 'tipocandelabro','action' => 'update', 'id' => $d->idtipoCandelabros)); ?>"> 
+                <?php echo $d->idtipoCandelabros; ?>
+            </a>
+        </td>
+              
+                         
+        <td><?php echo $d->nombre; ?></td>
+		<td><?php echo $d->observacion; ?></td>
+                           
+        <td>
+            <a href="<?php echo $this->url(array('controller' => 'tipocandelabro','action' => 'update', 'id' => $d->idtipoCandelabros)); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/ico-editar.gif" title="Editar">
+            </a>
+        </td>
+        
+        <td>
+
+            <a href="<?php echo $this->url(array('controller' => 'tipocandelabro',
+                       'action' => 'delete', 'id' => $d->idtipoCandelabros)); ?>">
+                <img src="<?php echo $this->baseUrl ?>/images/eliminar.png" title="Eliminar">
+            </a>
+        </td>
+        
+        </tr>
+<!--    fin del for-->
+    <?php endforeach; ?>
+</table>
+</div>

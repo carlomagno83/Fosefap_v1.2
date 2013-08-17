@@ -1,0 +1,57 @@
+<fieldset>
+<legend>Vehiculo</legend>
+<?php echo $this->form; ?>
+</fieldset>
+
+<style>
+fieldset{
+
+	border: 1px solid;
+	
+}
+
+
+#fieldset-left{
+	float:left;
+	border:none;
+}
+
+#fieldset-right{
+	float:left;
+	border:none;	
+}
+
+#fieldset-bottom{
+	clear:both;
+	border:none;	
+}
+
+#observacion{
+	height: 100px;
+}
+
+#idvehiculo-label{
+	display:none;
+}
+
+#submitbutton{
+	margin-left: 229px;
+}
+
+
+</style>
+
+<script>
+
+$('#FechaFab').datepicker(
+    {
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: "dd-mm-yy"      
+    }
+    
+    );
+
+$('dl').addClass('dl-horizontal');
+
+</script>

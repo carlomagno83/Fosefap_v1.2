@@ -1,0 +1,61 @@
+<!--creo link para agregar un album -->
+
+<table>
+    <tr style="border:none;background:none"> 
+        <td style="border:none;background:none">  
+            <a href="<?php echo $this->url(array('controller' => 'combustible','action' => 'add')); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/add.gif" title="Agregar">
+            </a>    
+        </td>    
+        <td style="border:none;background:none"> 
+            <a href="<?php echo $this->url(array('controller' => 'combustible','action' => 'add')); ?>">         
+            Combustible
+            </a>
+        </td> 
+    </tr>    
+</table>
+
+
+<!--creo una tabla para mostrar los datos-->
+<div id="containerTable" style="width: 603px;overflow: scroll;">
+<table>
+    <tr>
+        <th>id</th>
+        <th>Nombre</th>
+        <th>&nbsp;</th>                
+        <th>&nbsp;</th>        
+    </tr>
+					
+<!--recorro el arreglo de datos-->
+    <?php foreach ($this->datos as $d) : ?>
+
+        <tr>
+
+        <td>
+            <a href="<?php echo $this->url(array('controller' => 'combustible','action' => 'update', 'id' => $d->idcombustible)); ?>"> 
+                <?php echo $d->idcombustible; ?>
+            </a>
+        </td>
+              
+                         
+        <td><?php echo $d->nombre; ?></td>
+                           
+        <td>
+            <a href="<?php echo $this->url(array('controller' => 'combustible','action' => 'update', 'id' => $d->idcombustible)); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/ico-editar.gif" title="Editar">
+            </a>
+        </td>
+        
+        <td>
+
+            <a href="<?php echo $this->url(array('controller' => 'combustible',
+                       'action' => 'delete', 'id' => $d->idcombustible)); ?>">
+                <img src="<?php echo $this->baseUrl ?>/images/eliminar.png" title="Eliminar">
+            </a>
+        </td>
+        
+        </tr>
+<!--    fin del for-->
+    <?php endforeach; ?>
+</table>
+</div>

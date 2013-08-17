@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title><?php echo $this->title; ?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--        referencia al archivo css, uso $this->baseUrl para tener una referencia segun
+        el lugar dede donde se llame al layout-->
+        <link href="<?php echo $this->baseUrl; ?>/css/menu.css" type="text/css" rel="stylesheet">
+        <link href="<?php echo $this->baseUrl; ?>/css/wraper.css" type="text/css" rel="stylesheet">
+        <link href="<?php echo $this->baseUrl; ?>/css/content2.css" type="text/css" rel="stylesheet">        
+    </head>
+
+    <body>
+        
+<div id="container">
+	<div id="header">
+                <img src="<?php echo $this->baseUrl; ?>/images/logo-escuela5.png">
+                <div align='right' style="color: white"> <?php echo $this->loggedInAs(); ?> </div>
+	</div>
+	<div id="navigation">
+		<ul>
+			<li><a href="#">INICIO</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'tablas','action' => 'index')); ?>">TABLAS</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'afiliaciones','action' => 'index')); ?>">AFILIACIONES</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'operaciones','action' => 'index')); ?>">OPERACIONES</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'finanzas','action' => 'index')); ?>">FINANZAS</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'logistica','action' => 'index')); ?>">LOGISTICA</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'reportes','action' => 'index')); ?>">REPORTES</a></li>
+			<!--<li><a href="<?php echo $this->url(array('controller' => 'velatorio','action' => 'index')); ?>">VELATORIO</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'cementerio','action' => 'index')); ?>">CEMENTERIO</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'crematorio','action' => 'index')); ?>">CREMATORIO</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'departamento','action' => 'index')); ?>">DEPARTAMENTO</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'provincia','action' => 'index')); ?>">PROVINCIA</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'distrito','action' => 'index')); ?>">DISTRITO</a></li>
+			<li><a href="<?php echo $this->url(array('controller' => 'grado','action' => 'index')); ?>">GRADOS</a></li> 
+			<li><a href="<?php echo $this->url(array('controller' => 'aula','action' => 'index')); ?>">AULAS</a></li> 
+			<li><a href="<?php echo $this->url(array('controller' => 'horario','action' => 'index')); ?>">HORARIOS</a></li> -->                         
+		</ul>
+	</div>
+	<div id="content-container">
+	
+                <div id="content">
+                    <h1><?php echo $this->title; ?></h1>
+                    <?php echo $this->layout()->content; ?>
+                </div>
+            
+		<div id="aside">
+			<h3>
+				Información Personal
+			</h3>
+                    <p>
+                           Nombre: <?php echo $this->DatosUser->nombres  ?>
+                           <br> 
+                           Perfil: <?php echo $this->DatosUser->role ?>
+                    </p>    
+                        <img width="180" height="200" src="<?php echo $this->baseUrl; ?>/images/usuarios/<?php echo $this->DatosUser->image ?>">
+                        
+                        
+		</div>
+            
+		<div id="footer">
+			Copyright © fosepfap 2013
+		</div>
+            
+	</div>
+</div>        
+        
+    </body>
+</html>

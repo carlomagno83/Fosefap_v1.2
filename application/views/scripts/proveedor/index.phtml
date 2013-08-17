@@ -1,0 +1,178 @@
+<!--creo link para agregar un album -->
+
+Busqueda:
+<select id="filtroproveedor" >
+	<option value="1">RUC</option>
+	<option value="2">Nombre</option>
+</select> 
+
+<input type="text" name="txtBusqueda" id="txtBusqueda">
+<input style="display:none" type="text" name="txtBusquedaNombre" id="txtBusquedaNombre"> 
+<input type="button" class="btn" value="Buscar" id="buscar">
+
+<input type="button" class="btn" value="Exportar" id="exportar">
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+
+$('#exportar').on('click',function(){
+
+window.location.href = "<?php echo $this->url(array('controller' => 'proveedor','action' => 'exportarpdf') ); ?>"
+
+
+})
+
+
+
+$('#filtroproveedor').on('change',function(){
+
+	if( $(this).val() == 2 ){ 
+		$('#buscar').hide()
+		$('#txtBusquedaNombre').show()
+		$('#txtBusqueda').hide()		
+		
+	}
+		
+	if( $(this).val() == 1 ){ 
+		$('#buscar').show()	
+		$('#txtBusquedaNombre').hide()
+		$('#txtBusqueda').show()				
+	}	
+
+})
+
+
+//BUSQUEDA POR NOMBRE
+
+$("#txtBusquedaNombre").keyup( function(){
+	//console.log( $(this).val() )
+	var valueBusq = $(this).val()
+	
+		$.get('<?php echo $this->url(array('controller' => 'proveedor','action' => 'busquedaxnombre') ); ?>',{valueBusq:valueBusq}, function(data) {
+		$('#containerTable').empty();	
+		$('#containerTable').html( $(data).html() )
+		  
+		});	
+	
+	
+})
+
+
+//BUSQUEDA POR RUC
+$('#buscar').on('click',function(){
+    	
+    var valueBusq = $("#txtBusqueda").val()
+
+    $.get('<?php echo $this->url(array('controller' => 'proveedor','action' => 'busquedaxruc') ); ?>',{valueBusq:valueBusq}, function(data) {
+        $('#containerTable').empty();
+        $('#containerTable').html( $(data).html() )
+    });	
+    
+})
+
+
+
+
+</script>
+
+
+<table>
+    <tr style="border:none;background:none"> 
+        <td style="border:none;background:none">  
+            <a href="<?php echo $this->url(array('controller' => 'proveedor','action' => 'add')); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/add.gif" title="Agregar">
+            </a>    
+        </td>    
+        <td style="border:none;background:none"> 
+            <a href="<?php echo $this->url(array('controller' => 'proveedor','action' => 'add')); ?>">         
+            proveedor
+            </a>
+        </td> 
+    </tr>    
+</table>
+
+
+<!--creo una tabla para mostrar los datos-->
+
+
+<div id="containerTable" style="width: 603px;overflow: scroll;">
+<table>
+    <tr>
+        <th>Item</th>
+        <th>RUC</th>
+        <th>Categoria</th>		
+        <th>Nombre</th>
+        <th>Direccion</th>        
+        <th>Departamento</th>
+        <th>Provincia</th>		
+        <th>Distrito</th>		
+        <th>Telefono Fijo</th>
+        <th>Telefono Celular</th>
+        <th>Correo</th>
+        <th>Costo</th>	
+        <th>Observacion</th>
+        <th>User</th>
+        <th>Fecha</th>		
+        <th>&nbsp;</th>                
+        <th>&nbsp;</th>        
+    </tr>
+<!--recorro el arreglo de datos-->
+	<?php $contador = 1; ?>
+    <?php foreach ($this->datos as $d) : ?>
+
+        <tr>
+
+        <td>
+            <?php echo $contador++; ?>
+        </td>
+              
+        <td><?php echo $d->RUC; ?></td>
+                   
+        <td><?php echo $d->categoria; ?></td>				   
+				   
+        <td><?php echo $d->nombre; ?></td>
+                        
+        <td><?php echo $d->direccion; ?></td>
+                       
+        <td><?php echo $d->departamento;; ?></td>
+                   
+        <td><?php echo $d->provincia;; ?></td>
+                 
+        <td><?php echo $d->distrito; ?></td>
+
+        <td><?php echo $d->telefono_fijo; ?></td>
+
+        <td><?php echo $d->telefono_celular; ?></td>
+
+        <td><?php echo $d->mail; ?></td>
+
+        <td><?php echo $d->costo; ?></td>
+		
+        <td><?php echo $d->observacion; ?></td>		
+		
+        <td><?php echo $d->user; ?></td>
+
+        <td><?php echo $d->fecha; ?></td>	
+						 
+
+        <td>
+            <a href="<?php echo $this->url(array('controller' => 'proveedor',
+						'action' => 'update', 'ruc' => $d->RUC)); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/ico-editar.gif" title="Editar">
+            </a>
+        </td>
+        
+        <td>
+
+            <a href="<?php echo $this->url(array('controller' => 'proveedor',
+                       'action' => 'delete', 'ruc' => $d->RUC)); ?>">
+                <img src="<?php echo $this->baseUrl ?>/images/eliminar.png" title="Eliminar">
+            </a>
+        </td>
+        
+        </tr>
+<!--    fin del for-->
+    <?php endforeach; ?>
+</table>
+</div>

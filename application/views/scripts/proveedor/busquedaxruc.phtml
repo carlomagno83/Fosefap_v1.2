@@ -1,0 +1,79 @@
+<div id="containerTable" style="width: 603px;overflow: scroll;">
+<table>
+    <tr>
+        <th>Item</th>
+        <th>RUC</th>
+        <th>Categoria</th>		
+        <th>Nombre</th>
+        <th>Direccion</th>        
+        <th>Departamento</th>
+        <th>Provincia</th>		
+        <th>Distrito</th>		
+        <th>Telefono Fijo</th>
+        <th>Telefono Celular</th>
+        <th>Correo</th>
+        <th>Costo</th>	
+        <th>Observacion</th>
+        <th>User</th>
+        <th>Fecha</th>		
+        <th>&nbsp;</th>                
+        <th>&nbsp;</th>        
+    </tr>
+<!--recorro el arreglo de datos-->
+	<?php $contador = 1; ?>
+    <?php foreach ($this->datos as $d) : ?>
+
+        <tr>
+
+        <td>
+            <?php echo $contador++; ?>
+        </td>
+              
+        <td><?php echo $d->RUC; ?></td>
+                   
+        <td><?php echo $d->categoria; ?></td>				   
+				   
+        <td><?php echo $d->nombre; ?></td>
+                        
+        <td><?php echo $d->direccion; ?></td>
+                       
+        <td><?php echo $d->departamento;; ?></td>
+                   
+        <td><?php echo $d->provincia;; ?></td>
+                 
+        <td><?php echo $d->distrito; ?></td>
+
+        <td><?php echo $d->telefono_fijo; ?></td>
+
+        <td><?php echo $d->telefono_celular; ?></td>
+
+        <td><?php echo $d->mail; ?></td>
+
+        <td><?php echo $d->costo; ?></td>
+		
+        <td><?php echo $d->observacion; ?></td>		
+		
+        <td><?php echo $d->user; ?></td>
+
+        <td><?php echo $d->fecha; ?></td>	
+						 
+
+        <td>
+            <a href="<?php echo $this->url(array('controller' => 'proveedor','action' => 'update', 'ruc' => $d->RUC)); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/ico-editar.gif" title="Editar">
+            </a>
+        </td>
+        
+        <td>
+
+            <a href="<?php echo $this->url(array('controller' => 'proveedor',
+                       'action' => 'delete', 'ruc' => $d->RUC)); ?>">
+                <img src="<?php echo $this->baseUrl ?>/images/eliminar.png" title="Eliminar">
+            </a>
+        </td>
+        
+        </tr>
+<!--    fin del for-->
+    <?php endforeach; ?>
+</table>
+</div>

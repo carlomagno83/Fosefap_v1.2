@@ -1,0 +1,78 @@
+<!--creo link para agregar un album -->
+
+<table>
+    <tr style="border:none;background:none"> 
+        <td style="border:none;background:none">  
+            <a href="<?php echo $this->url(array('controller' => 'capilla','action' => 'add')); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/add.gif" title="Agregar">
+            </a>    
+        </td>    
+        <td style="border:none;background:none"> 
+            <a href="<?php echo $this->url(array('controller' => 'capilla','action' => 'add')); ?>">         
+            Capilla
+            </a>
+        </td> 
+    </tr>    
+</table>
+
+
+<!--creo una tabla para mostrar los datos-->
+<div id="containerTable" style="width: 603px;overflow: scroll;">
+<table>
+    <tr>
+        <th>id</th>
+		<th>idAtaud</th>
+		<th>Candelabros</th>
+        <th>Manto</th>
+        <th>Cristo</th>        
+        <th>Velas</th>
+		<th>Flamas</th>
+		<th>Alfombra</th>
+		<th>Letrero</th>
+		<th>Tarjetero</th>
+        <th>Observacion</th>
+        <th>&nbsp;</th>                
+        <th>&nbsp;</th>        
+    </tr>
+					
+<!--recorro el arreglo de datos-->
+    <?php foreach ($this->datos as $d) : ?>
+
+        <tr>
+
+        <td>
+            <a href="<?php echo $this->url(array('controller' => 'capilla','action' => 'update', 'id' => $d->idcapilla)); ?>"> 
+                <?php echo $d->idcapilla; ?>
+            </a>
+        </td>
+              
+        <td><?php echo $d->ataud; ?></td>
+        <td><?php echo $d->candelabros; ?></td>
+		<td><?php echo $d->manto; ?></td>
+		<td><?php echo $d->cristo; ?></td>
+		<td><?php echo $d->velas; ?></td>
+		<td><?php echo $d->flamas; ?></td>
+		<td><?php echo $d->alfombra; ?></td>
+		<td><?php echo $d->letrero; ?></td>
+		<td><?php echo $d->tarjetero; ?></td>
+		<td><?php echo $d->observacion; ?></td>		
+	        						 
+        <td>
+            <a href="<?php echo $this->url(array('controller' => 'capilla','action' => 'update', 'id' => $d->idcapilla)); ?>"> 
+                <img src="<?php echo $this->baseUrl ?>/images/ico-editar.gif" title="Editar">
+            </a>
+        </td>
+        
+        <td>
+
+            <a href="<?php echo $this->url(array('controller' => 'capilla',
+                       'action' => 'delete', 'id' => $d->idcapilla)); ?>">
+                <img src="<?php echo $this->baseUrl ?>/images/eliminar.png" title="Eliminar">
+            </a>
+        </td>
+        
+        </tr>
+<!--    fin del for-->
+    <?php endforeach; ?>
+</table>
+</div>

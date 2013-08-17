@@ -1,0 +1,103 @@
+<fieldset>
+<legend>Crematorio</legend>
+<?php echo $this->form; ?>
+</fieldset>
+
+<style>
+fieldset{
+
+	border: 1px solid;
+	
+}
+
+
+#fieldset-left{
+	float:left;
+	border:none;
+}
+
+#fieldset-right{
+	float:left;
+	border:none;	
+}
+
+#fieldset-bottom{
+	clear:both;
+	border:none;	
+}
+
+#observacion{
+	height: 100px;
+}
+
+
+
+/* Cambiar para cada formulario*/
+#idcrematorio-label{
+	display:none;
+}
+
+#submitbutton{
+	margin-left: 229px;
+}
+
+
+</style>
+
+<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+
+<script>
+
+
+$('dl').addClass('dl-horizontal');
+
+$('#RUC').attr('placeholder','digite 11 digitos')
+$('#observacion').attr('rows','5')
+
+</script>
+
+<script>
+
+
+	$('#iddepartamento').change( function(e){
+	
+		var codDepa = $(this).val()
+		//alert(codDepa)
+		$.get('../crematorio/listarprov',{  codDepa:codDepa }, function(data) {
+			
+			$('#idprovincias').empty()	
+			$('#iddistrito').empty()	
+			
+			$('#idprovincias').append("<option value='0'>select</option>")			
+			$.each($.parseJSON(data), function(index, value) {
+				$('#idprovincias').append("<option value="+value[0]+">"+value[1]+"</option>")
+			  
+			});
+
+		});
+			
+		
+	})
+
+
+	$('#idprovincias').change( function(e){
+
+		var codDistr = $(this).val()
+		$.get('../crematorio/listardistri',{  codDistr:codDistr }, function(data) {
+			
+			$('#iddistrito').empty()
+			
+			$('#iddistrito').append("<option value='0'>select</option>")			
+			$.each($.parseJSON(data), function(index, value) {
+				$('#iddistrito').append("<option value="+value[0]+">"+value[1]+"</option>")
+			  
+			});
+
+		});
+			
+		
+	})
+
+    
+</script>
+

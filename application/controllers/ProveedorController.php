@@ -18,9 +18,9 @@ class ProveedorController extends Zend_Controller_Action
 
     public function indexAction()
     {
-		// action body
-		$table = new Application_Model_DbTable_Proveedor(); 
-		$this->view->datos = $table->listar();
+	// action body
+	$table = new Application_Model_DbTable_Proveedor(); 
+	$this->view->datos = $table->listar();
     }
 
     public function addAction()

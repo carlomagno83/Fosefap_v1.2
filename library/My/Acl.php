@@ -46,7 +46,7 @@ class My_Acl extends Zend_Acl
 		$this->add(new Zend_Acl_Resource($resource3));                                                
                 $this->allow($ROL1,$resource3,array('index'));
                 $this->allow($ROL2,$resource3,array('index'));
-                $this->allow($ROL3,$resource3,array('index','add','delete','update','listarprov','listardistri','busquedaxnombre','busquedaxruc','exportarpdf','exportarpd'));                                
+                $this->allow($ROL3,$resource3,array('index','add','delete','update','listarprov','listardistri','busquedaxnombre','busquedaxruc','exportarpdf','exportarpd','listarproveedores'));                                
                 $this->allow($ROL4,$resource3,array('index','add','delete','update'));                                               
                                                                 
                 //Recurso Departamento

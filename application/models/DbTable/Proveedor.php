@@ -8,21 +8,21 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
     private $_sql = "SELECT
 		proveedores.RUC,
 		categorias.nombre categoria,
-		categorias.idcategoria,                
+		#categorias.idcategoria,                
 		proveedores.nombre,
 		proveedores.direccion,
 		departamentos.nombre departamento,
-		departamentos.iddepartamento,                
+		#departamentos.iddepartamento,                
 		provincias.nombres provincia,
-		provincias.idprovincia idprovincias,                
+		#provincias.idprovincia idprovincias,                
 		distritos.nombre distrito,
-		distritos.iddistrito,                
+		#distritos.iddistrito,                
 		proveedores.telefono_fijo,
 		proveedores.telefono_celular,
 		proveedores.mail,
 		proveedores.costo,
 		proveedores.observacion,
-		proveedores.`user`,
+		proveedores.user,
 		proveedores.fecha
 		FROM
 		proveedores
@@ -117,8 +117,8 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
     {
 		
         $db = Zend_Registry::get('db');	
-		$stmt = $db->query($this->_sql);     
-        $stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+	$stmt = $db->query($this->_sql);     
+        $stmt->setFetchMode(Zend_Db::FETCH_NUM);
         return $stmt->fetchAll();
 		
 

@@ -18,10 +18,31 @@ class ProveedorController extends Zend_Controller_Action
 
     public function indexAction()
     {
-	// action body
-	$table = new Application_Model_DbTable_Proveedor(); 
-	$this->view->datos = $table->listar();
+
     }
+    
+    public function listarproveedoresAction()
+    {
+        $this->_helper->layout->disableLayout();
+
+        $table = new Application_Model_DbTable_Proveedor(); 
+        
+        $output = array(
+		"sEcho" => 1,
+		"iTotalRecords" => 100,
+		"iTotalDisplayRecords" => 100,
+		"aaData" => array()
+	);
+	        
+        $output['aaData'] = $table->listar();
+        
+        echo Zend_Json::encode($output);
+        
+        
+        $this->_helper->viewRenderer->setNoRender();
+    }
+    
+    
 
     public function addAction()
     {

@@ -28,13 +28,13 @@ class ProveedorController extends Zend_Controller_Action
         $table = new Application_Model_DbTable_Proveedor(); 
         
         $output = array(
-		"sEcho" => 1,
-		"iTotalRecords" => 100,
-		"iTotalDisplayRecords" => 100,
+		"sEcho" => intval($_GET['sEcho']),
+		"iTotalRecords" => $table->countProveedores(),
+		"iTotalDisplayRecords" => 10,
 		"aaData" => array()
 	);
 	        
-        $output['aaData'] = $table->listar();
+        $output['aaData'] = $table->listar($_GET);
         
         echo Zend_Json::encode($output);
         

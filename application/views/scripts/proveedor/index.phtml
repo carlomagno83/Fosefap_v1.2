@@ -9,9 +9,10 @@
         
         if (jQuery().dataTable) {
             $("#table1").dataTable({
-                sScrollX: "100%",
-                sScrollXInner: "110%",
-                bScrollCollapse: true,                
+                //Scroll:
+                //sScrollX: "100%",
+                //sScrollXInner: "110%",
+                //bScrollCollapse: true,                
                 bProcessing: true,
                 bServerSide: true,
                 sAjaxSource: "proveedor/listarproveedores",                
@@ -28,11 +29,10 @@
                         sPrevious: "Prev",
                         sNext: "Next"
                     }
-                },
-                aoColumnDefs: [{
-                    bSortable: false,
-                    aTargets: [0]
-                }]
+                }, 
+                fnFooterCallback: function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+                        $(".nice-scroll").getNiceScroll().resize()
+                }
             })
         }
 
@@ -102,17 +102,17 @@
             <th>RUC</th>
             <th>categoria</th>
             <th>nombre</th>
-            <th class="text-center">direccion</th>
+            <th>direccion</th>
             <th>departamento</th>
             <th>provincia</th>
             <th>distrito</th>
             <th>telefono_fijo</th>
-            <th>telefono_celular</th>
+            <th class="text-center">telefono_celular</th>
             <th>mail</th>
-            <th>costo</th>
+            <!--<th>costo</th>
             <th>observacion</th>
             <th>user</th>
-            <th>fecha</th>            
+            <th>fecha</th>-->            
             <!--<th style="width:100px">Action</th>-->
         </tr>
     </thead>

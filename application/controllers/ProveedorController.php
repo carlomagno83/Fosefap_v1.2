@@ -23,14 +23,17 @@ class ProveedorController extends Zend_Controller_Action
     
     public function listarproveedoresAction()
     {
+        
+
         $this->_helper->layout->disableLayout();
 
         $table = new Application_Model_DbTable_Proveedor(); 
+        //die(  var_dump($table->getColumns() ));
         
         $output = array(
 		"sEcho" => intval($_GET['sEcho']),
 		"iTotalRecords" => $table->countProveedores(),
-		"iTotalDisplayRecords" => 10,
+		"iTotalDisplayRecords" => $table->countProveedores(),
 		"aaData" => array()
 	);
 	        

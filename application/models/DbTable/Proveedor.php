@@ -17,13 +17,13 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
 		#provincias.idprovincia idprovincias,                
 		distritos.nombre distrito,
 		#distritos.iddistrito,                
-		proveedores.telefono_fijo,
-		proveedores.telefono_celular,
-		proveedores.mail,
-		proveedores.costo,
-		proveedores.observacion,
-		proveedores.user,
-		proveedores.fecha
+		proveedores.telefono_fijo
+		#proveedores.telefono_celular
+		#proveedores.mail,
+		#proveedores.costo,
+		#proveedores.observacion,
+		#proveedores.user,
+		#proveedores.fecha
 		FROM
 		proveedores
 		INNER JOIN categorias ON proveedores.idcategoria = categorias.idcategoria
@@ -147,7 +147,7 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
     {
         
         $sOrder = "";
-        $aColumns = array( 'RUC','categoria','nombre','direccion','departamento','provincia','distrito','telefono_fijo','telefono_celular','mail,costo','observacion','user','fecha');
+        $aColumns = $this->getColumns();
         
 	if ( isset( $DATAGET['iSortCol_0'] ) )
 	{
@@ -177,7 +177,7 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
     {
         
         $sWhere = "";
-        $aColumns = array( 'RUC','categoria','nombre','direccion','departamento','provincia','distrito','telefono_fijo','telefono_celular','mail,costo','observacion','user','fecha');
+        $aColumns = $this->getColumns();
         
 	if ( isset($DATAGET['sSearch']) && $DATAGET['sSearch'] != "" )
 	{
@@ -213,6 +213,15 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
     }
     
     
+    public function getColumns()
+    {
+        
+        $db = Zend_Registry::get('db');	
+	$stmt = $db->query($this->_sql);     
+        return array_keys($stmt->fetch());		
+        
+    }
+    
     public function countProveedores()
     {
         
@@ -223,26 +232,6 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
         
     }
     
-    
-    
-    public function listarxnombre($codigo)
-    {
-	
-    $db = Zend_Registry::get('db');	
-    $stmt = $db->query($this->_sql." WHERE proveedores.nombre like ? ", array("%".$codigo."%"));     
-    $stmt->setFetchMode(Zend_Db::FETCH_OBJ);        
-    return $stmt->fetchAll();			
-    //return $this->fetchAll("nombre like '%".$codigo."%'");
-    }
-
-    public function listarxruc($codigo)
-    {
-        $db = Zend_Registry::get('db');	
-		$stmt = $db->query($this->_sql." WHERE RUC = ? ", array($codigo));     
-        $stmt->setFetchMode(Zend_Db::FETCH_OBJ);
-        return $stmt->fetchAll();                
-        
-    }	
 
 }
 

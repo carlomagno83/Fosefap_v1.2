@@ -61,7 +61,7 @@ class My_Acl extends Zend_Acl
                 //Recurso Provincia
                 $resource5 = 'provincia';                
 		$this->add(new Zend_Acl_Resource($resource5));                                               
-                $this->allow($ROL3,$resource5,array('index','add','delete','update'));                                
+                $this->allow($ROL3,$resource5,array('index','add','delete','update','listarprovincias','test1'));                                
                 $this->allow($ROL4,$resource5,array('index','add','update'));                                
                 
                 //Recurso Index

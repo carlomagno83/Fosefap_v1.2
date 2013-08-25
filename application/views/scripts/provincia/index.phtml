@@ -17,16 +17,17 @@
                     [10, 15, 25, 50, 100, "All"]
                 ],
                 iDisplayLength: 10,
-                oLanguage: {
-                    sLengthMenu: "_MENU_ Records per page",
-                    sInfo: "_START_ - _END_ of _TOTAL_",
-                    sInfoEmpty: "0 - 0 of 0",
+                                oLanguage: {
+                    sLengthMenu: "_MENU_ Registros por página",
+                    sInfo: "_START_ - _END_ de _TOTAL_",
+                    sInfoEmpty: "0 - 0 de 0",
                     oPaginate: {
-                        sPrevious: "Prev",
-                        sNext: "Next"
+                        sPrevious: "Next",
+                        sNext: "Prev"
                     }
                 }, 
-                fnFooterCallback: function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+                fnInfoCallback  : function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+                    //alert('xx')
                         $(".nice-scroll").getNiceScroll().resize()
                 }
             })

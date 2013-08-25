@@ -18,11 +18,34 @@ class VehiculoController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
-        $table = new Application_Model_DbTable_Vehiculo(); 
-				
-        $this->view->datos = $table->listar();
+       
     }
+    
+    public function listarvehiculosAction()
+    {
+        
+
+        $this->_helper->layout->disableLayout();
+
+        $table = new Application_Model_DbTable_Vehiculo(); 
+        //die(  var_dump($table->getColumns() ));
+        
+        $output = array(
+		"sEcho" => intval($_GET['sEcho']),
+		"iTotalRecords" => $table->countVehiculos(),
+		"iTotalDisplayRecords" => $table->countVehiculos(),
+		"aaData" => array()
+	);
+	        
+        $output['aaData'] = $table->listar($_GET);
+        
+        echo Zend_Json::encode($output);
+        
+        
+        $this->_helper->viewRenderer->setNoRender();
+    }
+    
+    
 
     public function addAction()
     {

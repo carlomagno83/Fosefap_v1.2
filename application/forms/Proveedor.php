@@ -78,7 +78,7 @@ class Application_Form_Proveedor extends Zend_Form
         $table = new Application_Model_DbTable_Provincia();
         //obtengo listado de todas los provincias y los recorro en un
         //arreglo para agregarlos a la lista
-        foreach ($table->listar() as $c)
+        foreach ($table->listar2() as $c)
         {
             $idprovincias->addMultiOption($c->idprovincia, $c->nombres);
         }
@@ -98,7 +98,7 @@ class Application_Form_Proveedor extends Zend_Form
         $table = new Application_Model_DbTable_Distrito();
         //obtengo listado de todos los distritos y los recorro en un
         //arreglo para agregarlos a la lista
-        foreach ($table->listar() as $c)
+        foreach ($table->listar2() as $c)
         {
             $iddistrito->addMultiOption($c->iddistrito, $c->nombre);
         }

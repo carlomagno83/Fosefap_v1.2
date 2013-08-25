@@ -22,14 +22,14 @@ class ProvinciaController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
 
         $table = new Application_Model_DbTable_Provincia(); 
-        
+                
         $output = array(
 		"sEcho" => intval($_GET['sEcho']),
 		"iTotalRecords" => $table->countProvincias(),
 		"iTotalDisplayRecords" => $table->countProvincias(),
 		"aaData" => array()
 	);
-	        
+        
         $output['aaData'] = $table->listar($_GET);
         
         echo Zend_Json::encode($output);
@@ -38,15 +38,5 @@ class ProvinciaController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
     }
 
-
-    public function test1Action()
-    {
-            
-        $this->_helper->layout->disableLayout();
-        $table = new Application_Model_DbTable_Provincia(); 
-        var_dump($table->info(Zend_Db_Table_Abstract::COLS));
-        $this->_helper->viewRenderer->setNoRender();
-        
-    }
 }
 

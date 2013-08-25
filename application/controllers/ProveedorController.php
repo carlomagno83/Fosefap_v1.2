@@ -21,6 +21,20 @@ class ProveedorController extends Zend_Controller_Action
 
     }
     
+    public function viewrecordAction()
+    {
+        $this->_helper->layout->disableLayout();
+        
+        $id = $this->_getParam('ruc', 0);
+        $proveedor = new Application_Model_DbTable_Proveedor();
+        $prove = $proveedor->get2($id);        
+        //var_dump($prove);
+        $this->view->datos = $prove;
+        //$this->_helper->viewRenderer->setNoRender();
+
+    }
+
+
     public function listarproveedoresAction()
     {
         

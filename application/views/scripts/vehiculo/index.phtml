@@ -1,95 +1,139 @@
-<!--creo link para agregar un album -->
+<!--FALTA EL BOTON EXPORTAR Y AGREGAR -->
 
-<table>
-    <tr style="border:none;background:none"> 
-        <td style="border:none;background:none">  
-            <a href="<?php echo $this->url(array('controller' => 'vehiculo','action' => 'add')); ?>"> 
-                <img src="<?php echo $this->baseUrl ?>/images/add.gif" title="Agregar">
-            </a>    
-        </td>    
-        <td style="border:none;background:none"> 
-            <a href="<?php echo $this->url(array('controller' => 'vehiculo','action' => 'add')); ?>">         
-            Vehiculo
-            </a>
-        </td> 
-    </tr>    
-</table>
+<!--page specific css styles-->
+<link rel="stylesheet" href="<?php echo $this->baseUrl ?>/assets/data-tables/DT_bootstrap.css" />
+
+<script>
+    
+    $(document).ready(function(){
+        
+        if (jQuery().dataTable) {
+            $("#table1").dataTable({
+                bScrollCollapse: true,                
+                bProcessing: true,
+                bServerSide: true,
+                sAjaxSource: "<?php echo $this->baseUrl ?>/vehiculo/listarvehiculos",                
+                aLengthMenu: [
+                    [10, 15, 25, 50, 100, -1],
+                    [10, 15, 25, 50, 100, "All"]
+                ],
+                iDisplayLength: 10,
+                oLanguage: {
+                    sLengthMenu: "_MENU_ Records per page",
+                    sInfo: "_START_ - _END_ of _TOTAL_",
+                    sInfoEmpty: "0 - 0 of 0",
+                    oPaginate: {
+                        sPrevious: "Prev",
+                        sNext: "Next"
+                    }
+                }, 
+                fnFooterCallback: function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+                        $(".nice-scroll").getNiceScroll().resize()
+                }
+            })
+        }
+
+    })
+    
+    
 
 
-<!--creo una tabla para mostrar los datos-->
-<div id="containerTable" style="width: 603px;overflow: scroll;">
-<table>
-    <tr>
-        <th>id</th>
-		<th>Placa</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Tipo</th>        
-        <th>Color</th>
-        <th>Combustible</th>		
-        <th>Motor</th>		
-        <th>Serie</th>
-        <th>Pasajero</th>
-        <th>Asientos</th>
-        <th>Fabricacion</th>	
-        <th>Observacion</th>
-        <th>&nbsp;</th>                
-        <th>&nbsp;</th>        
-    </tr>
-					
-<!--recorro el arreglo de datos-->
-    <?php $contador = 1; ?>
-    <?php foreach ($this->datos as $d) : ?>
+</script>
 
+
+            <!-- BEGIN Content -->
+            <div id="main-content">
+                <!-- BEGIN Page Title -->
+                <div class="page-title">
+                    <div>
+                        <h1><i class="icon-file-alt"></i> Dynamic Table</h1>
+                        <h4>Dynamic tables by DataTables</h4>
+                    </div>
+                </div>
+                <!-- END Page Title -->
+
+                <!-- BEGIN Breadcrumb -->
+                <div id="breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="index.html">Home</a>
+                            <span class="divider"><i class="icon-angle-right"></i></span>
+                        </li>
+                        <li class="active">Dynamic Table</li>
+                    </ul>
+                </div>
+                <!-- END Breadcrumb -->
+
+                <!-- BEGIN Main Content -->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="box">
+                            <div class="box-title">
+                                <h3><i class="icon-table"></i> Dynamic Table</h3>
+                                <div class="box-tool">
+                                    <a data-action="collapse" href="#"><i class="icon-chevron-up"></i></a>
+                                    <a data-action="close" href="#"><i class="icon-remove"></i></a>
+                                </div>
+                            </div>
+                            <div class="box-content">
+                                <div class="btn-toolbar pull-right clearfix">
+                                    <div class="btn-group">
+                                        <a class="btn btn-circle show-tooltip" title="Add new record" href="#"><i class="icon-plus"></i></a>
+                                        <a class="btn btn-circle show-tooltip" title="Edit selected" href="#"><i class="icon-edit"></i></a>
+                                        <a class="btn btn-circle show-tooltip" title="Delete selected" href="#"><i class="icon-trash"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a class="btn btn-circle show-tooltip" title="Print" href="#"><i class="icon-print"></i></a>
+                                        <a class="btn btn-circle show-tooltip" title="Export to PDF" href="#"><i class="icon-file-text-alt"></i></a>
+                                        <a class="btn btn-circle show-tooltip" title="Export to Exel" href="#"><i class="icon-table"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a class="btn btn-circle show-tooltip" title="Refresh" href="#"><i class="icon-repeat"></i></a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+<table class="table table-advance" id="table1">
+    <thead>
         <tr>
-
-        <td>
-            <?php echo $contador++; ?>
-        </td>
-		
-		<td>
-            <?php echo $d->placa; ?>
-        </td>
-              
-        <td><?php echo $d->marca; ?></td>
-                   
-        <td><?php echo $d->modelo; ?></td>
-                        
-        <td><?php echo $d->tipo; ?></td>
-                       
-        <td><?php echo $d->color; ?></td>
-                   
-        <td><?php echo $d->combustible; ?></td>
-                 
-        <td><?php echo $d->motor; ?></td>
-
-        <td><?php echo $d->serie; ?></td>
-
-        <td><?php echo $d->pasajero; ?></td>
-
-        <td><?php echo $d->asiento; ?></td>
-
-        <td><?php echo $d->FechaFab; ?></td>
-		
-        <td><?php echo $d->observacion; ?></td>	
-		        						 
-
-        <td>
-            <a href="<?php echo $this->url(array('controller' => 'vehiculo','action' => 'update', 'placa' => $d->placa)); ?>"> 
-                <img src="<?php echo $this->baseUrl ?>/images/ico-editar.gif" title="Editar">
-            </a>
-        </td>
-        
-        <td>
-
-            <a href="<?php echo $this->url(array('controller' => 'vehiculo',
-                       'action' => 'delete', 'placa' => $d->placa)); ?>">
-                <img src="<?php echo $this->baseUrl ?>/images/eliminar.png" title="Eliminar">
-            </a>
-        </td>
-        
+           <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Tipo</th>        
+            <th>Color</th>
+            <th>Combustible</th>		
+            <th>Motor</th>		
+            <th>Serie</th>
+            <th>Pasajero</th>
+            <th>Asientos</th>
+            <th>Fabricacion</th>	
+            <th>Observacion</th>                      
+            <!--<th style="width:100px">Action</th>-->
         </tr>
-<!--    fin del for-->
-    <?php endforeach; ?>
+    </thead>
+    <tbody>
+            <tr>
+		<td colspan="5" class="dataTables_empty">Loading data from server</td>
+            </tr>
+    </tbody>
 </table>
-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Main Content -->
+                
+                <footer>
+                    <p>2013 © FLATY Admin Template.</p>
+                </footer>
+
+                <a id="btn-scrollup" class="btn btn-circle btn-large" href="#"><i class="icon-chevron-up"></i></a>
+            </div>
+            <!-- END Content -->
+            
+            
+        <!--page specific plugin scripts-->
+        <script type="text/javascript" src="<?php echo $this->baseUrl ?>/assets/data-tables/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="<?php echo $this->baseUrl ?>/assets/data-tables/DT_bootstrap.js"></script>
+            
+

@@ -8,28 +8,47 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
     private $_sql = "SELECT
 		proveedores.RUC,
 		categorias.nombre categoria,
-		#categorias.idcategoria,                
 		proveedores.nombre,
 		proveedores.direccion,
 		departamentos.nombre departamento,
-		#departamentos.iddepartamento,                
 		provincias.nombres provincia,
-		#provincias.idprovincia idprovincias,                
 		distritos.nombre distrito,
-		#distritos.iddistrito,                
-		proveedores.telefono_fijo
-		#proveedores.telefono_celular
-		#proveedores.mail,
-		#proveedores.costo,
-		#proveedores.observacion,
-		#proveedores.user,
-		#proveedores.fecha
+		proveedores.telefono_fijo,
+                'xx'
 		FROM
 		proveedores
 		INNER JOIN categorias ON proveedores.idcategoria = categorias.idcategoria
 		INNER JOIN distritos ON proveedores.iddistrito = distritos.iddistrito
 		INNER JOIN provincias ON distritos.idprovincia = provincias.idprovincia
 		INNER JOIN departamentos ON provincias.iddepartamento = departamentos.iddepartamento";	
+    
+    
+    private $_sql2 = "SELECT
+		proveedores.RUC,
+		categorias.nombre categoria,
+		categorias.idcategoria,                
+		proveedores.nombre,
+		proveedores.direccion,
+		departamentos.nombre departamento,
+		departamentos.iddepartamento,                
+		provincias.nombres provincia,
+		provincias.idprovincia idprovincias,                
+		distritos.nombre distrito,
+		distritos.iddistrito,                
+		proveedores.telefono_fijo,
+		proveedores.telefono_celular,
+		proveedores.mail,
+		proveedores.costo,
+		proveedores.observacion,
+		proveedores.user,
+		proveedores.fecha
+		FROM
+		proveedores
+		INNER JOIN categorias ON proveedores.idcategoria = categorias.idcategoria
+		INNER JOIN distritos ON proveedores.iddistrito = distritos.iddistrito
+		INNER JOIN provincias ON distritos.idprovincia = provincias.idprovincia
+		INNER JOIN departamentos ON provincias.iddepartamento = departamentos.iddepartamento";	    
+    
 	
     public function get($id)
     {
@@ -50,7 +69,7 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
 
         $db = Zend_Registry::get('db');	
 	
-        $stmt = $db->query($this->_sql." WHERE RUC = '" . $id."' ");
+        $stmt = $db->query($this->_sql2." WHERE RUC = '" . $id."' ");
         if (!$stmt)
         {
             throw new Exception("Could not find row $id");
@@ -112,7 +131,10 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
     {
         $this->delete("RUC = '" .$id."'"  );
     }
+    
+   
 
+    //BEGIN - METDODOS DATATABLE
     public function listar($DATAGET)
     {
         
@@ -231,7 +253,7 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
         return $row['nprovs'];		
         
     }
-    
+    //END - METDODOS DATATABLE  
 
 }
 

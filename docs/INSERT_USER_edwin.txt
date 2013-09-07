@@ -1,0 +1,18 @@
+INSERT INTO users (
+username,
+password,
+salt,
+role,
+date_created,
+image,
+nombres)
+
+VALUES (
+'elaguna',
+SHA1('pamle24ce8d96d579d389e783f95b3772785783ea1a9854'),
+'ce8d96d579d389e783f95b3772785783ea1a9854',
+'admin',
+NOW(),
+'edwin.jpg',
+'Edwin Laguna');
+http://localhost/zend/aulaVirtual/public/auth

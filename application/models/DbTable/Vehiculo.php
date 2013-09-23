@@ -17,7 +17,8 @@ class Application_Model_DbTable_Vehiculo extends Zend_Db_Table_Abstract
                             a.pasajero,
                             a.asiento,
                             a.FechaFab,
-                            a.observacion
+                            a.observacion,
+                            'xx'
                         FROM vehiculos as a
                         left join marcas as b on a.idmarca = b.idmarca 
                         left join modelos as c on a.idmodelo = c.idmodelo 
@@ -162,7 +163,7 @@ class Application_Model_DbTable_Vehiculo extends Zend_Db_Table_Abstract
         
 	if ( isset($DATAGET['sSearch']) && $DATAGET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE (";
+		$sWhere = "HAVING (";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= "`".$aColumns[$i]."` LIKE '%".mysql_real_escape_string( $DATAGET['sSearch'] )."%' OR ";
@@ -178,7 +179,7 @@ class Application_Model_DbTable_Vehiculo extends Zend_Db_Table_Abstract
 		{
 			if ( $sWhere == "" )
 			{
-				$sWhere = "WHERE ";
+				$sWhere = "HAVING ";
 			}
 			else
 			{

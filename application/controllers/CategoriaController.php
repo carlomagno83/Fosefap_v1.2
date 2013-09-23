@@ -8,7 +8,7 @@ class CategoriaController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here **/ 
-		$this->initView();
+	$this->initView();
         if(!Zend_Auth::getInstance()->hasIdentity()) $this->_helper->redirector('index','auth');           
         $this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->DatosUser = Zend_Auth::getInstance()->getIdentity(); 
@@ -16,13 +16,36 @@ class CategoriaController extends Zend_Controller_Action
 
     public function indexAction()
     {
-       // action body
-		$table = new Application_Model_DbTable_Categoria(); 
-				
-        $this->view->datos = $table->listar();
-    }
 
-	public function addAction()
+    }
+    
+    
+    public function listarcategoriasAction()
+    {
+        
+
+        $this->_helper->layout->disableLayout();
+
+        $table = new Application_Model_DbTable_Categoria();
+        //die(  var_dump($table->getColumns() ));
+        
+        $output = array(
+		"sEcho" => intval($_GET['sEcho']),
+		"iTotalRecords" => $table->countProveedores(),
+		"iTotalDisplayRecords" => $table->countProveedores(),
+		"aaData" => array()
+	);
+	        
+        $output['aaData'] = $table->listar2($_GET);
+        
+        echo Zend_Json::encode($output);
+        
+        
+        $this->_helper->viewRenderer->setNoRender();
+    }    
+    
+
+    public function addAction()
     {
         // action body
 		//titulo para la pagina
@@ -82,7 +105,7 @@ class CategoriaController extends Zend_Controller_Action
     {
         // action body
 		//debe venir un parametro, por GET o POST, llamado id, con el id del album a borrar
-        $id = $this->_getParam('id', 0);
+        $id = $this->_getParam('idcategoria', 0);
         //creo objeto tabla Album
         $tabla = new Application_Model_DbTable_Categoria();
         //llamo a la funcion borrar
@@ -153,7 +176,7 @@ class CategoriaController extends Zend_Controller_Action
             //si vienbe un parametro llamado id le asigno su valor a $id; 
             //si no viene, le asigno cero
             //esto es como llamar a $_REQUEST
-            $id = $this->_getParam('id', 0);
+            $id = $this->_getParam('idcategoria', 0);
             //si viene algun id
             if ($id > 0)
             {

@@ -203,7 +203,7 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
         
 	if ( isset($DATAGET['sSearch']) && $DATAGET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE (";
+		$sWhere = "HAVING (";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= "`".$aColumns[$i]."` LIKE '%".mysql_real_escape_string( $DATAGET['sSearch'] )."%' OR ";
@@ -219,7 +219,7 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
 		{
 			if ( $sWhere == "" )
 			{
-				$sWhere = "WHERE ";
+				$sWhere = "HAVING ";
 			}
 			else
 			{

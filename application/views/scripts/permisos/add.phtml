@@ -1,41 +1,12 @@
 <link rel="stylesheet" href="<?php echo $this->baseUrl ?>/assets/data-tables/DT_bootstrap.css" />
 
 <style>
-fieldset{
 
-	border: none;
-	
-}
-
-
-#fieldset-left{
-	float:left;
-	border:none;
-}
-
-#fieldset-right{
-	float:left;
-	border:none;	
-}
-
-#fieldset-bottom{
-	clear:both;
-	border:none;	
-}
-
-#observacion{
-	height: 100px;
-}
-
-/* Cambiar para cada formulario*/
-#idproveedor-label{
-	display:none;
-}
-
+/*
 #submitbutton{
 	margin-left: 229px;
 }
-
+*/
 </style>
 
 
@@ -52,7 +23,6 @@ $(document).ready(function(){
 	
         
     //combos dependientes    
-    alert('hhh')
     $('#iddepartamento').change( function(e){
 
             var codDepa = $(this).val()
@@ -148,7 +118,7 @@ $(document).ready(function(){
                                 </div>
                                 <div class="clearfix"></div>
 <fieldset>
-<legend></legend>
+    <legend>&nbsp;&nbsp; Agregar Privilegios</legend>
 <?php echo $this->form; ?>
 </fieldset>
                                 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50508
 File Encoding         : 65001
 
-Date: 2013-09-18 08:13:50
+Date: 2013-09-23 22:06:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -88,7 +88,7 @@ CREATE TABLE `categorias` (
   `idcategoria` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idcategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of categorias
@@ -96,7 +96,7 @@ CREATE TABLE `categorias` (
 INSERT INTO `categorias` VALUES ('1', 'Velatorio');
 INSERT INTO `categorias` VALUES ('2', 'Crematorio');
 INSERT INTO `categorias` VALUES ('4', 'Flores');
-INSERT INTO `categorias` VALUES ('5', 'Cementerio');
+INSERT INTO `categorias` VALUES ('6', 'Cementerio');
 
 -- ----------------------------
 -- Table structure for colores
@@ -2119,9 +2119,13 @@ INSERT INTO `permisos` VALUES ('delete', null);
 INSERT INTO `permisos` VALUES ('exportarpd', null);
 INSERT INTO `permisos` VALUES ('exportarpdf', null);
 INSERT INTO `permisos` VALUES ('index', null);
+INSERT INTO `permisos` VALUES ('listarcategorias', null);
 INSERT INTO `permisos` VALUES ('listardistri', null);
+INSERT INTO `permisos` VALUES ('listarpermisos', null);
 INSERT INTO `permisos` VALUES ('listarprov', null);
 INSERT INTO `permisos` VALUES ('listarproveedores', null);
+INSERT INTO `permisos` VALUES ('listarvehiculos', null);
+INSERT INTO `permisos` VALUES ('logout', null);
 INSERT INTO `permisos` VALUES ('update', null);
 INSERT INTO `permisos` VALUES ('viewrecord', null);
 
@@ -2152,10 +2156,10 @@ CREATE TABLE `proveedores` (
 -- ----------------------------
 -- Records of proveedores
 -- ----------------------------
+INSERT INTO `proveedores` VALUES ('12345678911', 'nnnnn', 'ddd', '2', '111', '456465', 'mario.conchaflores@gmail.com', '44', 'oo', null, '2013-09-22 23:17:09', '1');
 INSERT INTO `proveedores` VALUES ('2345678901', 'merino', 'av. las palmas 123', '1263', '1234567', '123456789', 'totos@hotmail.com', '200', 'sssss', null, '2013-07-13 17:31:18', '2');
 INSERT INTO `proveedores` VALUES ('23456789012', 'Jardines de la Paz', 'Av. La Molina 1245', '1264', '123456789', '987456123', 'jardinez@gmail.com', '200', 'Para los socios', null, '2013-07-25 18:37:15', '1');
 INSERT INTO `proveedores` VALUES ('3456789012', 'Anita', 'Av. San luis 123', '1251', '23456790', '2345678902', 'anita@hotmail.com', '345', '2233', null, '2013-07-13 18:22:29', '1');
-INSERT INTO `proveedores` VALUES ('34567890123', 'ffff', 'gggg', '1514', '1234567', '2345678902', 'aaa@hotmail.com', '1000', 'dd', null, '2013-07-20 17:48:58', '1');
 
 -- ----------------------------
 -- Table structure for provincias
@@ -2394,6 +2398,7 @@ INSERT INTO `recursos` VALUES ('index', null);
 INSERT INTO `recursos` VALUES ('marca', null);
 INSERT INTO `recursos` VALUES ('modelo', null);
 INSERT INTO `recursos` VALUES ('modeloataud', null);
+INSERT INTO `recursos` VALUES ('permisos', null);
 INSERT INTO `recursos` VALUES ('proveedor', null);
 INSERT INTO `recursos` VALUES ('provincia', null);
 INSERT INTO `recursos` VALUES ('reporte', null);
@@ -2418,8 +2423,6 @@ CREATE TABLE `roles` (
 -- ----------------------------
 INSERT INTO `roles` VALUES ('admin', null);
 INSERT INTO `roles` VALUES ('alumno', null);
-INSERT INTO `roles` VALUES ('profesor', null);
-INSERT INTO `roles` VALUES ('secretaria', null);
 
 -- ----------------------------
 -- Table structure for rol_recurso_permiso
@@ -2431,42 +2434,43 @@ CREATE TABLE `rol_recurso_permiso` (
   `recurso` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`permiso`,`role`,`recurso`),
   KEY `fk_rol_recurso_permiso_permisos1_idx` (`permiso`),
-  KEY `fk_rol_recurso_permiso_rol_tiene_recurso1_idx` (`role`,`recurso`),
+  KEY `fk_rol_recurso_permiso_roles1` (`role`),
+  KEY `fk_rol_recurso_permiso_recursos1` (`recurso`),
   CONSTRAINT `fk_rol_recurso_permiso_permisos1` FOREIGN KEY (`permiso`) REFERENCES `permisos` (`permiso`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_rol_recurso_permiso_rol_tiene_recurso1` FOREIGN KEY (`role`, `recurso`) REFERENCES `rol_tiene_recurso` (`role`, `recurso`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_rol_recurso_permiso_recursos1` FOREIGN KEY (`recurso`) REFERENCES `recursos` (`recurso`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rol_recurso_permiso_roles1` FOREIGN KEY (`role`) REFERENCES `roles` (`role`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of rol_recurso_permiso
 -- ----------------------------
 INSERT INTO `rol_recurso_permiso` VALUES ('add', 'admin', 'categoria');
+INSERT INTO `rol_recurso_permiso` VALUES ('add', 'admin', 'permisos');
 INSERT INTO `rol_recurso_permiso` VALUES ('add', 'admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('add', 'admin', 'vehiculo');
 INSERT INTO `rol_recurso_permiso` VALUES ('delete', 'admin', 'categoria');
 INSERT INTO `rol_recurso_permiso` VALUES ('delete', 'admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('delete', 'admin', 'vehiculo');
+INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'ataud');
+INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'auth');
 INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'categoria');
 INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'error');
+INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'index');
+INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'permisos');
 INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'proveedor');
-
--- ----------------------------
--- Table structure for rol_tiene_recurso
--- ----------------------------
-DROP TABLE IF EXISTS `rol_tiene_recurso`;
-CREATE TABLE `rol_tiene_recurso` (
-  `role` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `recurso` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`role`,`recurso`),
-  KEY `fk_table1_roles1_idx` (`role`),
-  KEY `fk_table1_recursos1_idx` (`recurso`),
-  CONSTRAINT `fk_table1_recursos1` FOREIGN KEY (`recurso`) REFERENCES `recursos` (`recurso`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_table1_roles1` FOREIGN KEY (`role`) REFERENCES `roles` (`role`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- ----------------------------
--- Records of rol_tiene_recurso
--- ----------------------------
-INSERT INTO `rol_tiene_recurso` VALUES ('admin', 'categoria');
-INSERT INTO `rol_tiene_recurso` VALUES ('admin', 'error');
-INSERT INTO `rol_tiene_recurso` VALUES ('admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'vehiculo');
+INSERT INTO `rol_recurso_permiso` VALUES ('index', 'alumno', 'auth');
+INSERT INTO `rol_recurso_permiso` VALUES ('index', 'alumno', 'index');
+INSERT INTO `rol_recurso_permiso` VALUES ('listarcategorias', 'admin', 'categoria');
+INSERT INTO `rol_recurso_permiso` VALUES ('listardistri', 'admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('listarpermisos', 'admin', 'permisos');
+INSERT INTO `rol_recurso_permiso` VALUES ('listarprov', 'admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('listarproveedores', 'admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('listarvehiculos', 'admin', 'vehiculo');
+INSERT INTO `rol_recurso_permiso` VALUES ('logout', 'admin', 'auth');
+INSERT INTO `rol_recurso_permiso` VALUES ('update', 'admin', 'categoria');
+INSERT INTO `rol_recurso_permiso` VALUES ('update', 'admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('update', 'admin', 'vehiculo');
 
 -- ----------------------------
 -- Table structure for tamanoataudes
@@ -2533,11 +2537,12 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `fk_users_roles1_idx` (`role`),
   CONSTRAINT `fk_users_roles1` FOREIGN KEY (`role`) REFERENCES `roles` (`role`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
+INSERT INTO `users` VALUES ('1', 'mario', '02c81c92dd5201c32dc54dd5bfe6167c94fd79d6', 'ce8d96d579d389e783f95b3772785783ea1a9854', '2013-09-21 16:29:01', 'edwin.jpg', 'Edwin Laguna', 'admin');
 
 -- ----------------------------
 -- Table structure for vehiculos
@@ -2577,5 +2582,5 @@ INSERT INTO `vehiculos` VALUES ('ABC124', 'bmbm,', '2', '2', '2', '3', '3', '656
 INSERT INTO `vehiculos` VALUES ('ABC127', 'bmbm,', '3', '1', '3', '2', '2', '65675675', '68698698', '123', '21', '2013-07-02');
 INSERT INTO `vehiculos` VALUES ('ABZ-123', 'Vehiculo de la carroza', '1', '2', '3', '3', '3', 'ACSSS-1458', '123456987', '20', '12', '2011-02-03');
 INSERT INTO `vehiculos` VALUES ('ANB-201', 'VEHICULO PARA TRASLADO DE PERSONAL', '2', '2', '2', '3', '3', 'ZAD-1258-FG', 'AS10124555', '20', '10', '2013-01-02');
-INSERT INTO `vehiculos` VALUES ('ASD-258', 'OK', '3', '1', '3', '4', '4', '124587-SSS-9', 'ASS-98512', '20', '10', '2012-01-09');
-INSERT INTO `vehiculos` VALUES ('BOG-123555', 'ef', '1', '1', '1', '1', '1', '1234', '234567', '123', '12', '2013-06-08');
+INSERT INTO `vehiculos` VALUES ('AQ-002', 'OO', '1', '1', '1', '1', '1', '124587-SSS-9', '22', '3', '4', '2013-09-01');
+INSERT INTO `vehiculos` VALUES ('ASD-258', 'OK', '2', '1', '3', '4', '4', '124587-SSS-9', 'ASS-98512', '20', '10', '2012-01-09');

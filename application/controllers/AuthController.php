@@ -1,5 +1,5 @@
 <?php
-require_once '/forms/Login.php';
+require_once 'forms/Login.php';
 
 class AuthController extends Zend_Controller_Action
 {

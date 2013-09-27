@@ -191,6 +191,91 @@ class CategoriaController extends Zend_Controller_Action
             }
         }	
     }
+    
+
+    
+    public function exportarpdfAction()
+    {
+        
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();        
+                
+        require_once("dompdf/dompdf_config.inc.php");
+
+        $table = new Application_Model_DbTable_Categoria();
+
+        $dataObj = $table->listar();
+        $PDFTempFile = $this->_arrayToTableHtml( $dataObj );		
+        		
+        $dompdf = new DOMPDF();
+        $dompdf->load_html($PDFTempFile);
+        $dompdf->render();
+        $dompdf->stream("sample.pdf");
+
+        exit();
+
+    }
+    
+    
+    public function exportarexcelAction()
+    {
+    
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();        
+ 
+        $table = new Application_Model_DbTable_Categoria();
+
+        $dataObj = $table->listar();
+        $PDFTempFile = $this->_arrayToTableHtml( $dataObj );		
+        		
+        header("Content-type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=reporte.xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        echo $PDFTempFile;       
+        
+        
+    }
+
+    
+    public function _arrayToTableHtml($data)
+    {
+    
+        $str = "";
+	$str.= "<table border='1' cellspacing='0' cellpadding='4'>";
+
+		//Header
+		$str.= "<tr>";
+		$dataHeader = $data[0];
+		foreach($dataHeader as $key=>$value){
+			
+			$str.= "<td> $key";
+									
+			$str.= "</td>";
+			
+		}	
+		$str.= "</tr>";
+
+		//Registros
+		foreach($data as $key=>$value){
+			
+			$str.= "<tr>";
+			
+			foreach($value as $key1=>$value1){
+				$str.= "<td>$value1</td>";  
+			}
+						
+			$str.= "</tr>";
+			
+		}
+
+	$str.= "</table>";        
+        
+        return $str;
+        
+    }	
+    
+    
 	
 }
 

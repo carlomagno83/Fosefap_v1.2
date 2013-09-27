@@ -6,6 +6,11 @@
 <script>
     
         function test1(ruc){
+
+            $('#modal-2 .modal-body').html("<div class='progress progress-striped active'>\n\
+                                            <div style='width: 45%;' class='bar'></div>\n\
+                                            </div>");
+        
             $('#modal-2 .modal-body').load('<?php echo $this->baseUrl ?>/proveedor/viewrecord/ruc/'+ruc)
         }
     
@@ -50,7 +55,7 @@
                   "bSortable": false,
                   "fnRender": function (oObj) {
                      return " <div class='btn-group'>\n\
-                            <a class='btn btn-small show-tooltip' title='View' href='#modal-2' data-toggle='modal' ><i onclick='test1(" + oObj.aData[0] + ")' class='icon-zoom-in'></i></a>\n\
+                            <a onclick='test1(" + oObj.aData[0] + ")' class='btn btn-small show-tooltip' title='View' href='#modal-2' data-toggle='modal' ><i class='icon-zoom-in'></i></a>\n\
                             <a class='btn btn-small show-tooltip' title='Edit' href='<?php echo $this->baseUrl ?>/proveedor/update/ruc/" + oObj.aData[0] + "'><i class='icon-edit'></i></a>\n\
                             <a class='btn btn-small btn-danger show-tooltip' title='Delete' href='<?php echo $this->baseUrl ?>/proveedor/delete/ruc/" + oObj.aData[0] + "'><i class='icon-trash'></i></a></div>  ";
                    }
@@ -114,9 +119,9 @@
                                         <a class="btn btn-circle show-tooltip" title="Nuevo proveedor" href="<?php echo "$this->baseUrl" ?>/proveedor/add"><i class="icon-plus"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <a class="btn btn-circle show-tooltip" title="Imprimir" href="#"><i class="icon-print"></i></a>
-                                        <a class="btn btn-circle show-tooltip" title="Exportar PDF" href="#"><i class="icon-file-text-alt"></i></a>
-                                        <a class="btn btn-circle show-tooltip" title="Exportar Excel" href="#"><i class="icon-table"></i></a>
+                                        <a class="btn btn-circle show-tooltip" href="<?php echo "$this->baseUrl" ?>/proveedor/exportarpdf" title="Imprimir"><i class="icon-print"></i></a>
+                                        <a class="btn btn-circle show-tooltip" href="<?php echo "$this->baseUrl" ?>/proveedor/exportarpdf" title="Exportar PDF" ><i class="icon-file-text-alt"></i></a>
+                                        <a class="btn btn-circle show-tooltip" href="<?php echo "$this->baseUrl" ?>/proveedor/exportarexcel" title="Exportar Excel" ><i class="icon-table"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <a class="btn btn-circle show-tooltip" title="Refresh" href="#"><i class="icon-repeat"></i></a>
@@ -145,7 +150,11 @@
     </thead>
     <tbody>
             <tr>
-		<td colspan="5" class="dataTables_empty">Loading data from server</td>
+		<td colspan="5" class="dataTables_empty">
+                                <div class="progress progress-striped active">
+                                    <div style="width: 45%;" class="bar"></div>
+                                </div>
+                </td>
             </tr>
     </tbody>
 </table>
@@ -157,15 +166,14 @@
     <div id="modal-2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel1">Modal header</h3>
+            <h3 id="myModalLabel1">Proveedor</h3>
         </div>
         <div class="modal-body">
             
             
         </div>
         <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary" data-dismiss="modal">Save changes</button>
+            <button class="btn btn-primary" data-dismiss="modal">Aceptar</button>
         </div>
     </div>                
                 

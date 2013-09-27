@@ -49,7 +49,22 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
 		INNER JOIN provincias ON distritos.idprovincia = provincias.idprovincia
 		INNER JOIN departamentos ON provincias.iddepartamento = departamentos.iddepartamento";	    
     
-	
+    private $_sql3 = "SELECT
+		proveedores.RUC,
+		categorias.nombre categoria,
+		proveedores.nombre,
+		proveedores.direccion,
+		departamentos.nombre departamento,
+		provincias.nombres provincia,
+		distritos.nombre distrito,
+		proveedores.telefono_fijo
+		FROM
+		proveedores
+		INNER JOIN categorias ON proveedores.idcategoria = categorias.idcategoria
+		INNER JOIN distritos ON proveedores.iddistrito = distritos.iddistrito
+		INNER JOIN provincias ON distritos.idprovincia = provincias.idprovincia
+		INNER JOIN departamentos ON provincias.iddepartamento = departamentos.iddepartamento";	
+    
     public function get($id)
     {
 
@@ -132,6 +147,16 @@ class Application_Model_DbTable_Proveedor extends Zend_Db_Table_Abstract
         $this->delete("RUC = '" .$id."'"  );
     }
     
+    
+    public function listar2()
+    {
+        
+        $db = Zend_Registry::get('db');		
+        $stmt = $db->query($this->_sql3); 
+        $stmt->setFetchMode(Zend_Db::FETCH_ASSOC);        
+        return $stmt->fetchAll();
+        
+    }
    
 
     //BEGIN - METDODOS DATATABLE

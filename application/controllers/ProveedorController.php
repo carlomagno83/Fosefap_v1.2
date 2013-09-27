@@ -42,7 +42,6 @@ class ProveedorController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
 
         $table = new Application_Model_DbTable_Proveedor(); 
-        //die(  var_dump($table->getColumns() ));
         
         $output = array(
 		"sEcho" => intval($_GET['sEcho']),
@@ -289,7 +288,7 @@ class ProveedorController extends Zend_Controller_Action
                         
     }
 
-    public function exportarpdfAction($tipoFiltro)
+    public function exportarpdfAction()
     {
         
         $this->_helper->layout->disableLayout();
@@ -299,34 +298,9 @@ class ProveedorController extends Zend_Controller_Action
 
         $table = new Application_Model_DbTable_Proveedor();
 
-		$dataObj = $table->listar();
-		/*
-		if( $tipoFiltro == ){	
-        $dataObj = $table->listarxnombre($_GET['valueBusq']);
-        }
-		
-		if( $tipoFiltro == ){
-		$dataObj = $table->listarxruc($_GET['valueBusq'])
-		}
-		*/
-		
-        $PDFTempFile = $this->_arrayToTableHtml( $dataObj->toArray() );
-        
-		$newHTML = '<table width="200" border="1">
-  <tr>
-    <td bgcolor="#003399">&nbsp;</td>
-    <td bgcolor="#003399">&nbsp;</td>
-  </tr>
-  <tr>
-    <td bgcolor="#CC3333">&nbsp;</td>
-    <td bgcolor="#CC3333">&nbsp;</td>
-  </tr>
-</table>';
-		
-		$PDFTempFile = $newHTML.$PDFTempFile.$newHTML;
-		
-		//die( $PDFTempFile );
-		
+        $dataObj = $table->listar2();
+        $PDFTempFile = $this->_arrayToTableHtml( $dataObj );		
+        		
         $dompdf = new DOMPDF();
         $dompdf->load_html($PDFTempFile);
         $dompdf->render();
@@ -335,9 +309,31 @@ class ProveedorController extends Zend_Controller_Action
         exit();
 
     }
+    
+    
+    public function exportarexcelAction()
+    {
+    
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();        
+ 
+        $table = new Application_Model_DbTable_Proveedor();
+
+        $dataObj = $table->listar2();
+        $PDFTempFile = $this->_arrayToTableHtml( $dataObj );		
+        		
+        header("Content-type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=reporte.xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        echo $PDFTempFile;       
+        
+        
+    }
 
     
-    public function _arrayToTableHtml($data){
+    public function _arrayToTableHtml($data)
+    {
     
         $str = "";
 	$str.= "<table border='1' cellspacing='0' cellpadding='4'>";

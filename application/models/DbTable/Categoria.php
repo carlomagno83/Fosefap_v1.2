@@ -9,8 +9,11 @@ class Application_Model_DbTable_Categoria extends Zend_Db_Table_Abstract
                     FROM
                     categorias";	
     
+    private $_sql2 = "SELECT idcategoria,nombre
+                    FROM
+                    categorias";	
 
-	public function get($id)
+    public function get($id)
     {
         $id = (int) $id;
         //$this->fetchRow devuelve fila donde id = $id
@@ -43,7 +46,10 @@ class Application_Model_DbTable_Categoria extends Zend_Db_Table_Abstract
 		
     public function listar()
     {
-        return $this->fetchAll();
+        $db = Zend_Registry::get('db');	
+	$stmt = $db->query($this->_sql2);     
+        $stmt->setFetchMode(Zend_Db::FETCH_ASSOC);
+        return $stmt->fetchAll();	
     }
     
     
@@ -116,7 +122,7 @@ class Application_Model_DbTable_Categoria extends Zend_Db_Table_Abstract
         
 	if ( isset($DATAGET['sSearch']) && $DATAGET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE (";
+		$sWhere = "HAVING (";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= "`".$aColumns[$i]."` LIKE '%".mysql_real_escape_string( $DATAGET['sSearch'] )."%' OR ";
@@ -132,7 +138,7 @@ class Application_Model_DbTable_Categoria extends Zend_Db_Table_Abstract
 		{
 			if ( $sWhere == "" )
 			{
-				$sWhere = "WHERE ";
+				$sWhere = "HAVING ";
 			}
 			else
 			{

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50508
 File Encoding         : 65001
 
-Date: 2013-09-23 22:06:39
+Date: 2013-09-30 01:14:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -2116,6 +2116,8 @@ INSERT INTO `permisos` VALUES ('add', null);
 INSERT INTO `permisos` VALUES ('busquedaxnombre', null);
 INSERT INTO `permisos` VALUES ('busquedaxruc', null);
 INSERT INTO `permisos` VALUES ('delete', null);
+INSERT INTO `permisos` VALUES ('error', null);
+INSERT INTO `permisos` VALUES ('exportarexcel', null);
 INSERT INTO `permisos` VALUES ('exportarpd', null);
 INSERT INTO `permisos` VALUES ('exportarpdf', null);
 INSERT INTO `permisos` VALUES ('index', null);
@@ -2449,8 +2451,19 @@ INSERT INTO `rol_recurso_permiso` VALUES ('add', 'admin', 'permisos');
 INSERT INTO `rol_recurso_permiso` VALUES ('add', 'admin', 'proveedor');
 INSERT INTO `rol_recurso_permiso` VALUES ('add', 'admin', 'vehiculo');
 INSERT INTO `rol_recurso_permiso` VALUES ('delete', 'admin', 'categoria');
+INSERT INTO `rol_recurso_permiso` VALUES ('delete', 'admin', 'permisos');
 INSERT INTO `rol_recurso_permiso` VALUES ('delete', 'admin', 'proveedor');
 INSERT INTO `rol_recurso_permiso` VALUES ('delete', 'admin', 'vehiculo');
+INSERT INTO `rol_recurso_permiso` VALUES ('error', 'admin', 'error');
+INSERT INTO `rol_recurso_permiso` VALUES ('error', 'admin', 'index');
+INSERT INTO `rol_recurso_permiso` VALUES ('exportarexcel', 'admin', 'categoria');
+INSERT INTO `rol_recurso_permiso` VALUES ('exportarexcel', 'admin', 'permisos');
+INSERT INTO `rol_recurso_permiso` VALUES ('exportarexcel', 'admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('exportarexcel', 'admin', 'vehiculo');
+INSERT INTO `rol_recurso_permiso` VALUES ('exportarpdf', 'admin', 'categoria');
+INSERT INTO `rol_recurso_permiso` VALUES ('exportarpdf', 'admin', 'permisos');
+INSERT INTO `rol_recurso_permiso` VALUES ('exportarpdf', 'admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('exportarpdf', 'admin', 'vehiculo');
 INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'ataud');
 INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'auth');
 INSERT INTO `rol_recurso_permiso` VALUES ('index', 'admin', 'categoria');
@@ -2471,6 +2484,8 @@ INSERT INTO `rol_recurso_permiso` VALUES ('logout', 'admin', 'auth');
 INSERT INTO `rol_recurso_permiso` VALUES ('update', 'admin', 'categoria');
 INSERT INTO `rol_recurso_permiso` VALUES ('update', 'admin', 'proveedor');
 INSERT INTO `rol_recurso_permiso` VALUES ('update', 'admin', 'vehiculo');
+INSERT INTO `rol_recurso_permiso` VALUES ('viewrecord', 'admin', 'proveedor');
+INSERT INTO `rol_recurso_permiso` VALUES ('viewrecord', 'admin', 'vehiculo');
 
 -- ----------------------------
 -- Table structure for tamanoataudes
@@ -2542,7 +2557,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'mario', '02c81c92dd5201c32dc54dd5bfe6167c94fd79d6', 'ce8d96d579d389e783f95b3772785783ea1a9854', '2013-09-21 16:29:01', 'edwin.jpg', 'Edwin Laguna', 'admin');
+INSERT INTO `users` VALUES ('1', 'mario', '02c81c92dd5201c32dc54dd5bfe6167c94fd79d6', 'ce8d96d579d389e783f95b3772785783ea1a9854', '2013-09-21 16:29:01', 'avatar3.jpg', 'Mario Concha', 'admin');
 
 -- ----------------------------
 -- Table structure for vehiculos
@@ -2577,8 +2592,7 @@ CREATE TABLE `vehiculos` (
 -- ----------------------------
 -- Records of vehiculos
 -- ----------------------------
-INSERT INTO `vehiculos` VALUES ('ABC123', 'bmbm,', '1', '1', '1', '2', '2', '65675675', '68698698', '123', '21', '2013-07-02');
-INSERT INTO `vehiculos` VALUES ('ABC124', 'bmbm,', '2', '2', '2', '3', '3', '65675675', '68698698', '123', '21', '2013-07-02');
+INSERT INTO `vehiculos` VALUES ('ABC124', 'bmbm', '2', '2', '2', '3', '3', '65675675', '68698698', '123', '21', '2013-07-02');
 INSERT INTO `vehiculos` VALUES ('ABC127', 'bmbm,', '3', '1', '3', '2', '2', '65675675', '68698698', '123', '21', '2013-07-02');
 INSERT INTO `vehiculos` VALUES ('ABZ-123', 'Vehiculo de la carroza', '1', '2', '3', '3', '3', 'ACSSS-1458', '123456987', '20', '12', '2011-02-03');
 INSERT INTO `vehiculos` VALUES ('ANB-201', 'VEHICULO PARA TRASLADO DE PERSONAL', '2', '2', '2', '3', '3', 'ZAD-1258-FG', 'AS10124555', '20', '10', '2013-01-02');

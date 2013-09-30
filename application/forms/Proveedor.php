@@ -30,7 +30,7 @@ class Application_Form_Proveedor extends Zend_Form
         $table = new Application_Model_DbTable_Categoria();
         //obtengo listado de todos los departamentos y los recorro en un
         //arreglo para agregarlos a la lista
-        foreach ($table->listar() as $c)
+        foreach ($table->listar3() as $c)
         {
             $idcategoria->addMultiOption($c->idcategoria, $c->nombre);
         }

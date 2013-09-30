@@ -10,6 +10,8 @@ class Application_Model_DbTable_Permiso extends Zend_Db_Table_Abstract
         return $this->fetchAll();
         
     }    
+        
+ 
 
 }
 

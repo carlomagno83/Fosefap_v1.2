@@ -13,11 +13,6 @@ class Application_Model_DbTable_Vehiculo extends Zend_Db_Table_Abstract
                             e.nombre as color,
                             f.nombre as combustible,
                             a.motor,
-                            a.serie,
-                            a.pasajero,
-                            a.asiento,
-                            a.FechaFab,
-                            a.observacion,
                             'xx'
                         FROM vehiculos as a
                         left join marcas as b on a.idmarca = b.idmarca 
@@ -25,6 +20,28 @@ class Application_Model_DbTable_Vehiculo extends Zend_Db_Table_Abstract
                         left join tipos as d on a.idtipo = d.idtipo 
                         left join colores as e on a.idcolor = e.idcolor
                         left join combustibles as f on a.idcombustible = f.idcombustible";
+    
+     protected $_sql2 = "SELECT 
+                            a.placa,
+                            b.nombre as marca,
+                            c.nombre as modelo,
+                            d.nombre as tipo,
+                            e.nombre as color,
+                            f.nombre as combustible,
+                            a.motor,
+                            a.serie,
+                            a.pasajero,
+                            a.asiento,
+                            a.FechaFab,
+                            a.observacion
+                        FROM vehiculos as a
+                        left join marcas as b on a.idmarca = b.idmarca 
+                        left join modelos as c on a.idmodelo = c.idmodelo 
+                        left join tipos as d on a.idtipo = d.idtipo 
+                        left join colores as e on a.idcolor = e.idcolor
+                        left join combustibles as f on a.idcombustible = f.idcombustible";
+   
+    
     
     public function get($id)
     {
@@ -38,13 +55,28 @@ class Application_Model_DbTable_Vehiculo extends Zend_Db_Table_Abstract
         
         return $row->toArray();
     }
+    
+    public function get2($id)
+    {
+
+        $db = Zend_Registry::get('db');	
+	
+        $stmt = $db->query($this->_sql2." WHERE placa = '" . $id."' ");
+        if (!$stmt)
+        {
+            throw new Exception("Could not find row $id");
+        }
+        
+        return $stmt->fetch();
+
+    }       
 
     public function agregar ($placa,$idmarca,$idmodelo,$idtipo,$idcolor,$idcombustible,$motor,$serie,$pasajero,$asiento,$FechaFab,$observacion)  
     {
         	
 		$data = array ('placa'=>$placa,
 						'idmarca'=>$idmarca,
-					    'idmodelo'=>$idmodelo,
+                                                'idmodelo'=>$idmodelo,
 						'idtipo'=>$idtipo,
 						'idcolor'=>$idcolor,
 						'idcombustible'=>$idcombustible,
@@ -89,8 +121,8 @@ class Application_Model_DbTable_Vehiculo extends Zend_Db_Table_Abstract
     public function listar2()
     {
         $db = Zend_Registry::get('db');
-        $stmt = $db->query($this->_sql);     
-        $stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+        $stmt = $db->query($this->_sql2);     
+        $stmt->setFetchMode(Zend_Db::FETCH_ASSOC);
         return $stmt->fetchAll();
     }
     

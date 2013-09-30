@@ -5,9 +5,6 @@
 
 <script>
     
-        function test1(ruc){
-            $('#modal-2 .modal-body').load('<?php echo $this->baseUrl ?>/proveedor/viewrecord/ruc/'+ruc)
-        }
     
     $(document).ready(function(){
                
@@ -24,7 +21,7 @@
                 iDisplayLength: 10,
                 oLanguage: {
                     sLengthMenu: "_MENU_ Registros por pagina",
-                    sInfo: "_START_ - _END_ of _TOTAL_",
+                    sInfo: "_START_ - _END_ de _TOTAL_",
                     sInfoEmpty: "0 - 0 of 0",
                     oPaginate: {
                         sPrevious: "Prev",
@@ -78,7 +75,7 @@
                     <ul class="breadcrumb">
                         <li>
                             <i class="icon-home"></i>
-                            <a href="index.html">Home</a>
+                            <a href="<?php echo $this->baseUrl ?>">Home</a>
                             <span class="divider"><i class="icon-angle-right"></i></span>
                         </li>
                         <li class="active">Privilegios</li>
@@ -98,14 +95,14 @@
                                 </div>
                             </div>
                             <div class="box-content">
-                                <div class="btn-toolbar pull-right clearfix">
+                                 <div class="btn-toolbar pull-right clearfix">
                                     <div class="btn-group">
                                         <a class="btn btn-circle show-tooltip" title="Nuevo permiso" href="<?php echo "$this->baseUrl" ?>/permisos/add"><i class="icon-plus"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <a class="btn btn-circle show-tooltip" title="Imprimir" href="#"><i class="icon-print"></i></a>
-                                        <a class="btn btn-circle show-tooltip" title="Exportar PDF" href="#"><i class="icon-file-text-alt"></i></a>
-                                        <a class="btn btn-circle show-tooltip" title="Exportar Excel" href="#"><i class="icon-table"></i></a>
+                                        <a class="btn btn-circle show-tooltip" href="<?php echo "$this->baseUrl" ?>/permisos/exportarpdf" title="Imprimir"><i class="icon-print"></i></a>
+                                        <a class="btn btn-circle show-tooltip" href="<?php echo "$this->baseUrl" ?>/permisos/exportarpdf" title="Exportar PDF" ><i class="icon-file-text-alt"></i></a>
+                                        <a class="btn btn-circle show-tooltip" href="<?php echo "$this->baseUrl" ?>/permisos/exportarexcel" title="Exportar Excel" ><i class="icon-table"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <a class="btn btn-circle show-tooltip" title="Refresh" href="#"><i class="icon-repeat"></i></a>
@@ -117,7 +114,7 @@
         <tr>
             <th>rol</th>
             <th>recurso</th>
-            <th>persmiso</th>
+            <th>permiso</th>
             <th style="width:100px">Accion</th>
         </tr>
     </thead>

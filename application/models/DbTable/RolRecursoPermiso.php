@@ -7,12 +7,26 @@ class Application_Model_DbTable_RolRecursoPermiso extends Zend_Db_Table_Abstract
     
     private $_sql = "SELECT role,recurso,permiso,'xx' FROM rol_recurso_permiso";
     
+    private $_sql2 = "SELECT role,recurso,permiso FROM rol_recurso_permiso";
+
     
-    public function listar(){
+    public function listar()
+    {
         
         return $this->fetchAll();
         
     }
+    
+    
+    public function listar3()
+    {
+        
+        $db = Zend_Registry::get('db');		
+        $stmt = $db->query($this->_sql2); 
+        $stmt->setFetchMode(Zend_Db::FETCH_ASSOC);        
+        return $stmt->fetchAll();
+        
+    }    
         
     public function agregar ($role,$recurso,$permiso)  
     {
@@ -35,7 +49,16 @@ class Application_Model_DbTable_RolRecursoPermiso extends Zend_Db_Table_Abstract
         }       
           
       
-    }    
+    }
+    
+    
+    
+    public function borrar($rol,$recurso,$permiso)
+    {
+        $this->delete("role = '" .$rol."'  AND  recurso = '" .$recurso."'  AND  permiso = '" .$permiso."' ");
+    }   
+    
+    
     
     //BEGIN - METDODOS DATATABLE
     public function listar2($DATAGET)

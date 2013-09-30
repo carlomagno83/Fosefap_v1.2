@@ -1,0 +1,24 @@
+<div class="box-content">
+        <form action="#" class="form-horizontal">
+<?php 
+
+foreach ($this->datos as $key => $value){
+
+    echo '
+    <div class="control-group">
+        <label class="control-label">'.$key.'</label>
+        <div class="controls">   
+            <input class="input-medium" readonly type="text" value="'.$value.'" />
+        </div>
+    </div>';
+          
+}
+?>
+
+        </form>
+</div>
+
+                        
+
+            
+            
